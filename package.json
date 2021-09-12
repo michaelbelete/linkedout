@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
     "@next-auth/prisma-adapter": "^0.5.4",
@@ -20,7 +21,15 @@
   "devDependencies": {
     "@types/node": "^15.12.2",
     "@types/react": "^17.0.11",
+    "@typescript-eslint/eslint-plugin": "^4.31.0",
+    "@typescript-eslint/parser": "^4.31.0",
     "autoprefixer": "^10.2.6",
+    "eslint": "^7.32.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.1.0",
+    "eslint-plugin-react": "^7.25.1",
     "postcss": "^8.3.1",
     "postcss-import": "^14.0.2",
     "prisma": "^2.30.2",
