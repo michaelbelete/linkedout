@@ -1,4 +1,5 @@
 import prisma from '../../../../lib/prisma';
+import bcrypt from 'bcrypt';
 
 export default async function handle(req, res) {
     const { fullName, email, password, company } = req.body;
@@ -31,11 +32,13 @@ export default async function handle(req, res) {
     if (checkEmail) {
         res.json("User already Exist please login");
     } else {
+        const salt = await bcrypt.genSalt();
+        const hashedPassword = await bcrypt.hash(password, salt);
         const dbUser = await prisma.user.create({
             data: {
                 fullName: fullName,
                 email: email,
-                password: password,
+                password: hashedPassword,
                 company: { connect: { id: companyId } }
             }
         });

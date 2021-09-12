@@ -1,5 +1,6 @@
 import { User } from '.prisma/client';
 import NextAuth from 'next-auth';
+import bcrypt from 'bcrypt';
 import Providers from 'next-auth/providers';
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import prisma from '../../../../lib/prisma';
@@ -16,20 +17,28 @@ const configuration = {
                 const user : User = await prisma.user.findFirst({
                     where: {
                         email: credentials.email,
-                        password: credentials.password
                     }
                 });
 
                 if (user == null) {
                     return null;
                 } else {
-                    userAccount = {
-                        "name": user.fullName,
-                        "email": user.email,
-                        "image": user.companyId
-                    }
+                    const checkPassword = await bcrypt.compare(
+                        credentials.password, user.password
+                    )
 
-                    return userAccount;
+                    if(checkPassword) {
+                        userAccount = {
+                            "name": user.fullName,
+                            "email": user.email,
+                            "image": user.companyId
+                        }
+    
+                        return userAccount;
+
+                    }else{
+                        return null;
+                    }
                 }
             }
         })
