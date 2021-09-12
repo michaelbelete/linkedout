@@ -1,9 +1,9 @@
 import React from "react";
 import Link from "next/link";
 import { useSession } from "next-auth/client";
-import { UserProps } from "../lib/user";
+import { Company } from ".prisma/client";
 
-const Body: React.FC<{ user: UserProps }> = ({ user }) => {
+const Body: React.FC<{ company: Company}> = ({ company }) => {
   const [session, loading] = useSession();
   let auth;
   if (loading) {
@@ -48,11 +48,11 @@ const Body: React.FC<{ user: UserProps }> = ({ user }) => {
       <>
         <div className="text-center lg:p-40 md:p-20 sm:p-10 ">
           <h1 className="text-5xl font-bold">
-            Welcome, <span className="text-red-800">{ user.fullName }</span>
+            Welcome, <span className="text-red-800">{ session.user.name }</span>
           </h1>
           
           <h1 className="text-3xl pt-5 font-bold">
-            You work for <span className="text-red-800">{ user.company?.name }</span>
+            You work for <span className="text-red-800">{ company?.name }</span>
           </h1>
         </div>
       </>

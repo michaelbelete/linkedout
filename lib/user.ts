@@ -8,8 +8,13 @@ export type UserProps = {
   };
 }
 
-export async function getLoggedInUser() {
-    const result = await fetch('http://localhost:3000/api/user')
+export type Company = {
+  id: Number;
+  name: string;
+}
+
+export async function getLoggedInUserCompany(email) {
+    const result = await fetch(`http://localhost:3000/api/company/${email}`)
     return result.json()
 }
 

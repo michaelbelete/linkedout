@@ -6,7 +6,7 @@ import Link from "next/link";
 import { checkLoggedIn } from "../../lib/navGuard";
 
 const SignUp: React.FC = () => {
-  checkLoggedIn()
+  checkLoggedIn() //navguard redirect to home if loggedin
   return (
     <Layout>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
