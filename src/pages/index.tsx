@@ -4,7 +4,7 @@ import { signIn, signOut, getSession, useSession } from 'next-auth/client'
 import Header from "../../components/Header";
 import Body from "../../components/Body";
 import { getLoggedInUserCompany, Company } from "../../lib/user";
-class Home extends React.Component {
+class Home extends React.Component<{}, { company: any }> {
 
   async componentDidMount() {
     const session = await getSession();
